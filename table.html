@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="so">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jadwalka Jimicsiga 7-Maalmood</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #ff6600;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #ff6600;
+            color: #fff;
+        }
+
+        td.day {
+            background-color: #f2f2f2;
+        }
+
+        td.category {
+            background-color: #e6f7ff;
+        }
+
+        td.exercise {
+            color: #ff6600;
+        }
+
+        td.amount {
+            color: #0099ff;
+        }
+
+        td.time {
+            color: #333;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            width: 300px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-content h2 {
+            margin: 0;
+            color: #ff6600;
+        }
+
+        .modal-content p {
+            font-size: 18px;
+            color: #333;
+        }
+
+        .close {
+            background: #ff6600;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        /* Progress Bar Styles */
+        .progress-container {
+            width: 100%;
+            background-color: #e6f7ff;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-bar {
+            height: 30px;
+            width: 0;
+            background-color: #ff6600;
+            text-align: center;
+            line-height: 30px;
+            color: #fff;
+            font-weight: bold;
+            transition: width 0.5s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Jadwalka Jimicsiga 7-Maalmood</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Maalin</th>
+                    <th>Jadwalka</th>
+                    <th>Jimicsiga</th>
+                    <th>Tirada</th>
+                    <th>Waqtiga</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr onclick="showModal('Isniin', 'Tababar Murqaha Sare', 'Warm-Up Push-Ups', '5-10 daqiiqo', 'Socod degdeg ah / Orod fudud')">
+                    <td class="day">Isniin</td>
+                    <td class="category">Tababar Murqaha Sare</td>
+                    <td class="exercise">Warm-Up/Push-Ups</td>
+                    <td class="amount">5-10 daqiiqo</td>
+                    <td class="time">Socod degdeg ah / Orod fudud</td>
+                </tr>
+                <tr onclick="showModal('Isniin', 'Tababar Murqaha Sare', 'Dumbbell Bench Press', '3 set x 10 reps', '-')">
+                    <td class="day">Isniin</td>
+                    <td class="category">Tababar Murqaha Sare</td>
+                    <td class="exercise">Dumbbell Bench Press</td>
+                    <td class="amount">3 set x 10 reps</td>
+                    <td class="time">-</td>
+                </tr>
+                <tr onclick="showModal('Talaado', 'Jimicsiga Cardiovascular', 'Orod', '20-30 daqiiqo', 'Xawaare dhexdhexaad ah')">
+                    <td class="day">Talaado</td>
+                    <td class="category">Jimicsiga Cardiovascular</td>
+                    <td class="exercise">Orod</td>
+                    <td class="amount">20-30 daqiiqo</td>
+                    <td class="time">Xawaare dhexdhexaad ah</td>
+                </tr>
+                <tr onclick="showModal('Arbaco', 'Tababar Murqaha Hoose', 'Squats', '3 set x 12-15 reps', '-')">
+                    <td class="day">Arbaco</td>
+                    <td class="category">Tababar Murqaha Hoose</td>
+                    <td class="exercise">Squats</td>
+                    <td class="amount">3 set x 12-15 reps</td>
+                    <td class="time">-</td>
+                </tr>
+                <tr onclick="showModal('Khamiis', 'Tababar Murqaha Pelvic Floor iyo Core', 'Kegel Exercises', '3 set x 10-15 reps', '-')">
+                    <td class="day">Khamiis</td>
+                    <td class="category">Tababar Murqaha Pelvic Floor iyo Core</td>
+                    <td class="exercise">Kegel Exercises</td>
+                    <td class="amount">3 set x 10-15 reps</td>
+                    <td class="time">-</td>
+                </tr>
+                <tr onclick="showModal('Khamiis', 'Tababar Murqaha Pelvic Floor iyo Core', 'Leg Raises', '3 set x 15 reps', '-')">
+                    <td class="day">Khamiis</td>
+                    <td class="category">Tababar Murqaha Pelvic Floor iyo Core</td>
+                    <td class="exercise">Leg Raises</td>
+                    <td class="amount">3 set x 15 reps</td>
+                    <td class="time">-</td>
+                </tr>
+                <tr onclick="showModal('Jimco', 'Cardio iyo Yoga', 'HIIT', '15-20 daqiiqo', '-')">
+                    <td class="day">Jimco</td>
+                    <td class="category">Cardio iyo Yoga</td>
+                    <td class="exercise">HIIT</td>
+                    <td class="amount">15-20 daqiiqo</td>
+                    <td class="time">-</td>
+                </tr>
+                <tr onclick="showModal('Sabti', 'Tababar Guud oo Jimicsi', 'Burpees', '3 set x 10 reps', '-')">
+                    <td class="day">Sabti</td>
+                    <td class="category">Tababar Guud oo Jimicsi</td>
+                    <td class="exercise">Burpees</td>
+                    <td class="amount">3 set x 10 reps</td>
+                    <td class="time">-</td>
+                </tr>
+                <tr onclick="showModal('Axad', 'Nasasho iyo Soo Kabasho', 'Nasasho', '-', '-')">
+                    <td class="day">Axad</td>
+                    <td class="category">Nasasho iyo Soo Kabasho</td>
+                    <td class="exercise">Nasasho</td>
+                    <td class="amount">-</td>
+                    <td class="time">-</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div id="progressBar" class="progress-bar">0/90</div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <h2 id="modalTitle">Maalin</h2>
+            <p id="modalCategory"></p>
+            <p id="modalExercise"></p>
+            <p id="modalAmount"></p>
+            <p id="modalTime"></p>
+            <button class="close" onclick="closeModal()">Xiro</button>
+        </div>
+    </div>
+
+    <script>
+        function showModal(day, category, exercise, amount, time) {
+            document.getElementById('modalTitle').innerText = day;
+            document.getElementById('modalCategory').innerText = 'Jadwalka: ' + category;
+            document.getElementById('modalExercise').innerText = 'Jimicsiga: ' + exercise;
+            document.getElementById('modalAmount').innerText = 'Tirada: ' + amount;
+            document.getElementById('modalTime').innerText = 'Waqtiga: ' + time;
+            document.getElementById('myModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('myModal').style.display = 'none';
+        }
+
+        // Example function to update progress bar
+        function updateProgress(current, total) {
+            var progressBar = document.getElementById('progressBar');
+            var percentage = (current / total) * 100;
+            progressBar.style.width = percentage + '%';
+            progressBar.innerText = current + '/' + total;
+        }
+
+        // Initialize progress (for example purposes)
+        updateProgress(20, 90); // Example to show 20/90
+    </script>
+</body>
+</html>
